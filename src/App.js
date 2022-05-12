@@ -1,5 +1,4 @@
-import "./App.css";
-import words from "./api.json";
+import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import Game from "./pages/Game";
