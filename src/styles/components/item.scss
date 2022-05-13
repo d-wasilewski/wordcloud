@@ -1,0 +1,19 @@
+@import "../utils/colors";
+
+.item {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+
+.clicked {
+  color: $color-gray-3;
+}
+
+.good {
+  background-color: "green";
+}
+
+.bad {
+  background-color: "red";
+}
