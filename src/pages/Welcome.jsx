@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import Input from "../components/Input";
+import { WordcloudContext } from "../context/WordcloudContext";
 import "../styles/pages/welcome.scss";
 
 const Welcome = () => {
+  const { setUsername } = useContext(WordcloudContext);
   const [value, setValue] = useState("");
   const navigate = useNavigate();
 
@@ -14,8 +16,7 @@ const Welcome = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(value);
-    // save name to context here
+    setUsername(value);
     navigate("/game");
   };
   return (

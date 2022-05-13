@@ -6,9 +6,11 @@ import Item from "../components/Item";
 
 const Game = () => {
   const [answers, setAnswers] = useState([]);
+
   const handleClick = () => {
     setAnswers(wordList.good_words);
   };
+
   return (
     <div className="wrapper">
       <h2>Select animals</h2>
