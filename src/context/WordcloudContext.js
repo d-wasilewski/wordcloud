@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export const WordcloudContext = React.createContext();
 
 export const WordcloudProvider = ({ children }) => {
   const [username, setUsername] = useState("");
-  //   const [potBalance, setPotBalance] = useState(0);
-  //   const [playersList, setPlayersList] = useState([]);
-  //   const [lotteryHistory, setLotteryHistory] = useState([]);
+  const [points, setPoints] = useState(0);
 
   return (
     <WordcloudContext.Provider
       value={{
         username,
         setUsername,
+        points,
+        setPoints,
       }}
     >
       {children}
