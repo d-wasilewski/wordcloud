@@ -4,21 +4,21 @@ import { Button } from "../components/Button";
 import "../styles/pages/game.scss";
 import Item from "../components/Item";
 import { WordcloudContext } from "../context/WordcloudContext";
+import { useNavigate } from "react-router-dom";
 
 const Game = () => {
   const [answers, setAnswers] = useState([]);
-  const { points, setPoints } = useContext(WordcloudContext);
+  const [isSubmited, setIsSubmitted] = useState(false);
+  const { setPoints } = useContext(WordcloudContext);
+  const navigate = useNavigate();
   const clickedArray = [];
 
-  const handleClick = () => {
+  const handleCheckClick = () => {
     setAnswers(wordList.good_words);
-    console.log("Clicked: ", clickedArray);
 
     const badWords = wordList.all_words.filter(
       (n) => !wordList.good_words.includes(n)
     );
-
-    console.log("Bad: ", badWords);
 
     for (const item of wordList.good_words) {
       if (clickedArray.includes(item)) {
@@ -33,11 +33,17 @@ const Game = () => {
         setPoints((prevState) => prevState - 1);
       }
     }
+
+    setIsSubmitted(true);
+  };
+
+  const handleFinishClick = () => {
+    navigate("/results");
   };
 
   return (
     <div className="wrapper">
-      <h2>Select animals {points}</h2>
+      <h2>Select animals</h2>
       <div className="box">
         {wordList.all_words.map((word) => {
           return (
@@ -50,7 +56,11 @@ const Game = () => {
           );
         })}
       </div>
-      <Button text="Check answers" onClick={handleClick} />
+      {!isSubmited ? (
+        <Button text="Check answers" onClick={handleCheckClick} />
+      ) : (
+        <Button text="Finish game" onClick={handleFinishClick} />
+      )}
     </div>
   );
 };
