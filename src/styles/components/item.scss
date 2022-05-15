@@ -11,9 +11,23 @@
 }
 
 .good {
-  color: green;
+  color: $color-green;
+  position: relative;
+  &::after {
+    content: "Good";
+    position: absolute;
+    bottom: 20px;
+    color: $color-green-light;
+  }
 }
 
 .bad {
-  color: red;
+  color: $color-red;
+  position: relative;
+  &::after {
+    content: "Bad";
+    position: absolute;
+    bottom: 20px;
+    color: $color-red-light;
+  }
 }

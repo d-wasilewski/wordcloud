@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import wordList from "../api.json";
 import { Button } from "../components/Button";
 import "../styles/pages/game.scss";
 import Item from "../components/Item";
@@ -9,9 +8,8 @@ import { useNavigate } from "react-router-dom";
 const Game = () => {
   const [answers, setAnswers] = useState([]);
   const [isSubmited, setIsSubmitted] = useState(false);
-  const { setPoints } = useContext(WordcloudContext);
+  const { setPoints, wordList, clickedArray } = useContext(WordcloudContext);
   const navigate = useNavigate();
-  const clickedArray = [];
 
   const handleCheckClick = () => {
     setAnswers(wordList.good_words);
@@ -43,19 +41,14 @@ const Game = () => {
 
   return (
     <div className="wrapper">
-      <h2>Select animals</h2>
+      <h2>{wordList.question}</h2>
       <div className="box">
-        {wordList.all_words.map((word) => {
-          return (
-            <Item
-              word={word}
-              key={word}
-              answers={answers}
-              clickedArray={clickedArray}
-            />
-          );
-        })}
+        {wordList &&
+          wordList?.all_words.map((word) => {
+            return <Item word={word} key={word} answers={answers} />;
+          })}
       </div>
+
       {!isSubmited ? (
         <Button text="Check answers" onClick={handleCheckClick} />
       ) : (

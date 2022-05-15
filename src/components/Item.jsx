@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
-import { WordcloudContext } from "../context/WordcloudContext";
+import React, { useState, useContext } from "react";
 import "../styles/components/item.scss";
+import { WordcloudContext } from "../context/WordcloudContext";
 
-const Item = ({ word, answers, clickedArray }) => {
+const Item = ({ word, answers }) => {
   const [isActive, setActive] = useState(false);
-  let { points, setPoints } = useContext(WordcloudContext);
+  const { clickedArray, setClickedArray } = useContext(WordcloudContext);
   const isCorrect = answers.includes(word);
 
   let answerClass = "";
@@ -21,7 +21,12 @@ const Item = ({ word, answers, clickedArray }) => {
       style={{ width: word.length * 40 }}
       onClick={() => {
         setActive(!isActive);
-        clickedArray.push(word);
+        if (clickedArray.includes(word)) {
+          const temp = clickedArray.filter((x) => x !== word);
+          setClickedArray(temp);
+        } else {
+          setClickedArray((prevState) => [...prevState, word]);
+        }
       }}
     >
       {word}
